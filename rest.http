@@ -1,0 +1,15 @@
+### GET 
+GET  http://localhost:8000/api/v1/users
+
+### POST
+POST http://localhost:8000/api/v1/users
+#Header
+Content-Type: application/json
+
+#Body
+{
+    "name":"Jon",
+    "email":"test@gmail.com",
+    "phone":12345,
+    "password":"test"
+}
