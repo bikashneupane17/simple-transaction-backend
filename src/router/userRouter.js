@@ -57,12 +57,15 @@ userRouter.post("/login", async (req, res) => {
 
     if (user?._id) {
       const isMatched = compairPassword(password, user.password);
+      //remove the password so server doesnot send it to client
+      user.password = undefined;
 
       if (isMatched) {
         //authorised
         return res.json({
           status: "success",
           message: "Profile Found, Welcome",
+          user,
         });
       }
     }

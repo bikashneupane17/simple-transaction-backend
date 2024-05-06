@@ -7,6 +7,7 @@ import cors from "cors";
 
 import { connectMongoDB } from "./src/config/mongoConfig.js";
 import userRouter from "./src/router/userRouter.js";
+import transactionRouter from "./src/router/transactionRouter.js";
 
 const app = express();
 const PORT = process.env.PORT || 8000;
@@ -21,6 +22,7 @@ connectMongoDB();
 
 //routes
 app.use("/api/v1/users", userRouter);
+app.use("/api/v1/transaction", transactionRouter);
 
 //initialize server
 app.listen(PORT, (error) => {
