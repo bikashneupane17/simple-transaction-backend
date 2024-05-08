@@ -1,6 +1,7 @@
 import express from "express";
 import {
   addNewTransaction,
+  deleteTransactionById,
   getTransactionById,
 } from "../model/Transaction/TransactionModel.js";
 
@@ -30,8 +31,9 @@ transactionRouter.post("/", async (req, res) => {
   // console.log(req.body);
   // console.log(req.headers.authorization);
 
-  const { authorization } = req.headers;
   try {
+    const { authorization } = req.headers;
+
     const trans = await addNewTransaction({
       userId: authorization,
       ...req.body,
@@ -50,6 +52,33 @@ transactionRouter.post("/", async (req, res) => {
   } catch (error) {
     res.json({
       status: "erroraaaa",
+      message: error.message,
+    });
+  }
+});
+
+transactionRouter.delete("/", async (req, res) => {
+  try {
+    console.log(req.body + "This is the");
+
+    const { authorization } = req.headers;
+    console.log("Auth" + authorization);
+
+    const trans = await deleteTransactionById(authorization, req.body);
+
+    trans?.deletedCount
+      ? res.json({
+          status: "success",
+          message: " Transaction Deleted",
+          trans,
+        })
+      : res.json({
+          status: "error",
+          message: "Unable to process the request, Try again",
+        });
+  } catch (error) {
+    res.json({
+      status: "error",
       message: error.message,
     });
   }

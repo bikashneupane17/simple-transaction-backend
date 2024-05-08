@@ -12,6 +12,7 @@ const transactionSchema = new mongoose.Schema(
     },
     amount: {
       type: Number,
+      min: "1",
       required: true,
     },
     date: {

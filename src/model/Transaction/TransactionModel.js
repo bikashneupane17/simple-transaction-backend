@@ -9,3 +9,10 @@ export const addNewTransaction = (transObj) => {
 export const getTransactionById = (userId) => {
   return !userId ? null : TransactionSchema.find({ userId });
 };
+
+//delete selected transaction
+export const deleteTransactionById = (userId, idsToDelete) => {
+  return !userId
+    ? null
+    : TransactionSchema.deleteMany({ _id: { $in: idsToDelete } });
+};
